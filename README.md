@@ -1,2 +1,3 @@
 # shena.ca
-My blogdown site
+
+Placeholder for now.
