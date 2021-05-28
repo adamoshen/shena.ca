@@ -41,3 +41,4 @@ vignettes/*.pdf
 # Blogdown stuff
 public/
 resources/
+themes/starter-academic/
