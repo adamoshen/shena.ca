@@ -42,3 +42,5 @@ vignettes/*.pdf
 public/
 resources/
 themes/starter-academic/
+R/
+notes.txt
