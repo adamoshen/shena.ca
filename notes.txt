@@ -1,0 +1,57 @@
+./themes/github.com/wowchemy/wowchemy-hugo-modules/wowchemy/layouts/partials
+	- Where all the html layout files live. Only modify the site_footer.html to designate yourself as a sponsor
+	in order to customize the footer message.
+	- The other files should be duplicated before modifying and placing in the ./layouts/partials/ folder for 
+	override
+
+./config.yaml
+	- Controls some site settings. Enable highlight: codefences: true to get syntax highlighting.
+
+./config/_default/
+	- menus.yaml: controls the order appearance and order of menu navbar items. Link to sub-pages using `folder/`
+	which references `./content/folder/`
+	- params.yaml: site colour theme, fonts, contact info, menu controls, other site features
+
+./content/authors/yourname(admin)/
+	- _index.md: your personal information, role, affiliation, education, biographical information. Mostly supplies
+	the info that goes in your "about" section
+
+./content/home/
+	- Markdown layout files for widgets. Toggle `active` to true or false to enable or disable certain widgets.
+	Alternatively delete the file. Can be re-retrieved from the exampleSite in the themes/ folder
+
+./content/post/
+	- Where your blog posts live
+
+./layouts/partials/
+	- Where you store your custom html override files
+
+./public/
+	- Contains the files used to build your website, and the materials you typically upload to the host.
+
+./static/media/
+	- Where you can place additional resources such as images or files. I think only non-blog content can access
+	these files using ./static/media/file. Blog posts are knit in the current directory rather than the project
+	directory.
+
+Links
+	Specify links as [linktext](/folder/file) for absolute paths
+	Specify links as [linktext](folder/file) for relative paths
+	Don't need quotes, don't need to bother with shortcodes
+
+./themes/github.com/wowchemy/wowchemy-hugo-modules/wowchemy/data/themes
+	- Where the default themes are stored
+	- #4caf50 is the accent colour for the forest theme
+
+Copy and paste files from
+./themes/github.com/wowchemy/wowchemy-hugo-modules/wowchemy/layouts/partials/widgets
+to
+./layouts/partials/widgets
+for safe override
+	- about.html: Changed the graduate cap colour to match accent colour. Remember to use color and not colour.
+		- Added markdownify in the source HTML to add institution links
+	- contact.html: Changed the envelope icon colour to match accent colour since this is probably the only
+	form of contact that will be displayed. Remember to use color and not colour
+
+./themes/github.com/wowchemy/wowchemy-hugo-modules/wowchemy/archetypes
+	- Shows all possible YAML header fields for different file types
