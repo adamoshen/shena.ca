@@ -1,6 +1,6 @@
 ---
-title: First blog post
-author: Adam Shen
+title: "First blog post"
+author: "Adam Shen"
 date: '2021-06-12'
 slug: first-blog-post
 categories: []
