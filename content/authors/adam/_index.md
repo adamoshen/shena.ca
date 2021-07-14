@@ -57,7 +57,8 @@ title: Adam Shen
 I am a PhD student studying statistics at [Carleton University](https://carleton.ca/math/), supervised by 
 [Dr. Dave Campbell](https://people.math.carleton.ca/~davecampbell/Dave_Campbell.html).
 
-My master's thesis, *Tales of a Coronavirus Pandemic: Topic Modelling with Short-Text Data*, explored graphical,
-quantitative, and statistical methods for analysing unstructured short-text data related to the COVID-19 pandemic. 
-I presented my findings at the Ninth Annual Canadian Statistics Students Conference and was awarded 2nd Prize for
-the Graduate Oral Presentation Award (Master's).
+My master's thesis, 
+[*Tales of a Coronavirus Pandemic: Topic Modelling with Short-Text Data*](https://doi.org/10.22215/etd/2021-14497), 
+explored graphical, quantitative, and statistical methods for analysing unstructured short-text data related to the
+COVID-19 pandemic. I presented my findings at the Ninth Annual Canadian Statistics Students Conference and was 
+awarded 2nd Prize for the Graduate Oral Presentation Award (Master's).
