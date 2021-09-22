@@ -7,6 +7,10 @@ layout: docs
 
 ## Carleton University
 
+[Stat 3503, Fall 2021](https://adamoshen.github.io/3503f21/)
+
+[Stat 3553, Fall 2021](https://adamoshen.github.io/3553f21/)
+
 [Stat 3558, Fall 2020](./3558f20/)
 
 [Stat 3553, Fall 2020](./3553f20/)
