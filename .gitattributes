@@ -1,3 +1,2 @@
 *.Rmd linguist-detectable
-*.Rmarkdown linguist-language=RMarkdown
-*.Rmarkdown linguist-detectable
+*.Rmarkdown linguist-language=RMarkdown linguist-detectable
