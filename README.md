@@ -10,7 +10,8 @@ My website was made with:
 
 Other sites also using `blogdown` with the Academic theme:
 
-[Julia Silge](https://juliasilge.com/), [site repo](https://github.com/juliasilge/juliasilge.com)
+Julia Silge, [site repo](https://github.com/juliasilge/juliasilge.com/tree/b0d1150a03b0e25b13bd1916b1343a0f575c4fad)
+(current site no longer using Academic theme)
 
 Alison Hill, [site repo](https://github.com/rbind/apreshill/tree/the-last-academic) (current site no longer using
 Academic theme)
