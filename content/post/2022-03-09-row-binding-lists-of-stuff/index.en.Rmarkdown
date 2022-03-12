@@ -2,7 +2,7 @@
 title: Row-binding lists of stuff
 author: Adam Shen
 date: '2022-03-09'
-slug: row-binding-lists-of-stuff
+slug: 2022-03-09-row-binding-lists-of-stuff
 categories:
   - r
 tags:
