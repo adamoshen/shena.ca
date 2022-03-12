@@ -209,7 +209,7 @@ stamos_face <- image_read("./img/stamos-face.png") %>%
 plot(stamos_face)
 ```
 
-<img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" />
+<img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-13-1.svg" width="672" style="display: block; margin: auto;" />
 
 ### Sort the lyric lines by their counts
 
@@ -243,7 +243,7 @@ ggplot(he_counts_reordered, aes(x=n, y=line)) +
   theme_minimal()
 ```
 
-<img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" />
+<img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-15-1.svg" width="672" style="display: block; margin: auto;" />
 
 # Conclusions
 
