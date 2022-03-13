@@ -88,7 +88,7 @@ cold-hearted snake", "he don't play by rules", etc.
 
 To do:
 
-First we need to get all the lyrics that mention he/he's. Then, we're going extract the part that 
+First we need to get all the lyrics that mention he/he's. Then, we're going to extract the part that 
 comes after he/he's, e.g. "he's a cold-hearted snake" &rarr; "a cold-hearted snake".
 
 Before we can visualise it, we're going to need to obtain the counts. In addition:
