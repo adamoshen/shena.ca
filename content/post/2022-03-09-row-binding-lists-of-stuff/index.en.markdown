@@ -53,8 +53,8 @@ polyroot(c(6, 5, 1))
 ## [1] -2+0i -3-0i
 ```
 
-If the equation had one distinct root, was not actually quadratic ($a = 0$), or was inconsistent
-($a,\, b = 0,\, c \neq 0$), a vector of length one was returned, e.g.:
+If the equation had one distinct root or was not actually quadratic ($a = 0$), a vector of length
+one was returned, e.g.:
 
 
 ```r
@@ -64,6 +64,10 @@ polyroot(c(1, 2))
 ```
 ## [1] -0.5+0i
 ```
+
+If the equation was inconsistent ($a,\, b = 0,\, c \neq 0$), a vector of length zero was returned,
+e.g.:
+
 
 ```r
 polyroot(3)
@@ -237,7 +241,7 @@ ggplot(real_roots, aes(x=x1, y=root)) +
   geom_point()
 ```
 
-<img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-11-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-12-1.svg" width="672" style="display: block; margin: auto;" />
 
 # Lists of matrices with rownames
 
@@ -353,4 +357,4 @@ ggplot(topic_term_prob_tibble, aes(x=probability, y=term, fill=topic)) +
   facet_wrap(~topic, scales="free_y")
 ```
 
-<img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-16-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-17-1.svg" width="672" style="display: block; margin: auto;" />
