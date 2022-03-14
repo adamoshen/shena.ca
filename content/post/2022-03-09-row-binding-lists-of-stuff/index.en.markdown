@@ -203,6 +203,9 @@ some_roots
 ## # ... with 912 more rows
 ```
 
+Note that at this point, `x1` is a column of type character, not numeric. Coercion of `x1` to
+numeric will be required for plotting.
+
 ## Optional plots of real roots
 
 

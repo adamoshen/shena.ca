@@ -127,6 +127,9 @@ some_roots <- seq(-13, 33, 0.10) %>%
 some_roots
 ```
 
+Note that at this point, `x1` is a column of type character, not numeric. Coercion of `x1` to
+numeric will be required for plotting.
+
 ## Optional plots of real roots
 
 ```{r}
