@@ -14,7 +14,7 @@ featured: no
 
 
 
-This problem of needing to convert a single-level list of data into a single tibble comes up once
+The problem of needing to convert a single-level list of data into a single tibble comes up once
 in while and I can never remember how I did it the last time I did it. So here we are! I would also
 like to stay in the tidyverse where possible in order to keep the flow of my pipelines. I'd say the
 only exception is the usage of `paste0` over `str_c`/`glue`.
@@ -98,7 +98,7 @@ Now, let's find some roots for some basic values of `x1`.
 
 
 ```r
-some_roots <- seq(1, 3, 0.10) %>%
+some_roots <- seq(1, 1.60, length.out=7) %>%
   map(get_coefs) %>%
   map(polyroot)
 
@@ -163,7 +163,7 @@ of `map_dfr`'s `.id` argument, e.g.
 
 
 ```r
-seq(-13, 33, 0.10) %>%
+seq(-13, 33, by=0.10) %>%
   set_names(., .) %>%
   head()
 ```
@@ -177,7 +177,7 @@ Putting it all together:
 
 
 ```r
-some_roots <- seq(-13, 33, 0.10) %>%
+some_roots <- seq(-13, 33, by=0.10) %>%
   set_names(., .) %>%
   map(get_coefs) %>%
   map(polyroot) %>%
@@ -254,7 +254,7 @@ Let's first generate some data.
 ```r
 phi <- function(n) {
   out <- matrix(
-    runif(n=n),
+    runif(n),
     dimnames = list(
       stringi::stri_rand_strings(
         n = n,
@@ -272,7 +272,7 @@ phi <- function(n) {
 
 ```r
 topic_term_prob <- rep(5, 3) %>%
-  set_names(nm=paste0("topic", 1:length(.))) %>%
+  set_names(., paste0("topic", 1:length(.))) %>%
   map(phi)
 
 topic_term_prob
@@ -309,10 +309,10 @@ own column, and also creating another column to keep track of the topic from whi
 distributions originated.
 
 The `as_tibble` method for matrices indeed supports the `rownames` argument, allowing input of a
-single string for the new column of rownames. This is not really documented on the
+single string for the name of new column of rownames. This is not really documented on the
 [`as_tibble` reference](https://tibble.tidyverse.org/reference/as_tibble.html) under
 `# S3 method for matrix`, but is documented under
-[as_tibble.matrix should keep rownames attribute #288](https://github.com/tidyverse/tibble/issues/288#issuecomment-334244077).
+[`as_tibble.matrix should keep rownames attribute #288`](https://github.com/tidyverse/tibble/issues/288#issuecomment-334244077).
 
 For the topic numbers, we can once again make use of the `.id` argument of `map_dfr`.
 
