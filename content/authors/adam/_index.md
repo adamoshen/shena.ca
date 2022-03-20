@@ -3,9 +3,9 @@ bio: "Bone app the teeth"
 
 education:
   courses:
-  # - course: PhD in Statistics
-  #   institution: "[Carleton University](https://carleton.ca/math/)"
-  #   year: Present
+  - course: PhD in Statistics
+    institution: "[Carleton University](https://carleton.ca/math/)"
+    year: "*"
   - course: MSc in Statistics
     institution: "[Carleton University](https://carleton.ca/math/)"
     year: 2021
@@ -34,7 +34,7 @@ social:
   link: /#contact
 - icon: twitter
   icon_pack: fab
-  link: https://twitter.com/adamoshen
+  link: https://twitter.com/oadamshen
 - icon: spotify
   icon_pack: fab
   link: https://open.spotify.com/playlist/0UsMz6cgSBDKm0LRaxBs7h?si=d4a29a5434714422
@@ -63,4 +63,4 @@ explored graphical, quantitative, and statistical methods for analysing unstruct
 COVID-19 pandemic. I presented my findings at the Ninth Annual Canadian Statistics Students Conference and was
 awarded 2nd Prize for the Graduate Oral Presentation Award (Master's).
 
-[This](https://profils-profiles.science.gc.ca/en/profile/adam-shen) is also me.
+I am also an [analyst at CRA](https://profils-profiles.science.gc.ca/en/profile/adam-shen).
