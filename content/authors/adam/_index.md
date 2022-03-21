@@ -34,7 +34,7 @@ social:
   link: /#contact
 - icon: twitter
   icon_pack: fab
-  link: https://twitter.com/oadamshen
+  link: https://twitter.com/adamoshen
 - icon: spotify
   icon_pack: fab
   link: https://open.spotify.com/playlist/0UsMz6cgSBDKm0LRaxBs7h?si=d4a29a5434714422
