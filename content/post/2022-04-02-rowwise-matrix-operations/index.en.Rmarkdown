@@ -20,8 +20,7 @@ knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE)
 # Packages and setup
 
 ```{r}
-library(tibble)
-library(dplyr)
+library(tidyverse)
 
 set.seed(20)
 ```
@@ -90,6 +89,8 @@ to `ungroup` when you're done mutating.
 
 ## Rowwise matrix operations
 
+### Output is a vector of length 1
+
 Suppose you wanted to perform the following computation using the values found in each row:
 
 $$ \mathbf{x}'\mathbf{A}\mathbf{x} $$
@@ -111,7 +112,7 @@ quadratic <- function(x, A) {
 }
 ```
 
-For the $ A $ matrix, let's use:
+For the $ \mathbf{A} $ matrix, let's use:
 
 ```{r}
 A <- matrix(
@@ -136,4 +137,53 @@ Checking our work:
 ```{r}
 quadratic(c(3, 1, 4), A)
 quadratic(c(5, 2, 4), A)
+```
+
+### Output is a vector of length greater than 1
+
+Suppose you wanted to perform the following computation using the values found in each row:
+
+$$ \mathbf{A}\mathbf{x} $$
+
+and wanted each value to go into its own column. This can be accomplished by first creating a
+function similar to the previous, but returning a list containing a named vector instead. Then we
+can use [`unnest_wider`](https://tidyr.tidyverse.org/reference/hoist.html) to unnest the values
+within the list into their own columns.
+
+Creating the right-multiplying function:
+
+```{r}
+right_mult <- function(x, A) {
+  x <- as.matrix(x)
+  
+  drop(A %*% x) %>%
+    set_names(., paste0("new_x", 1:length(.))) %>%
+    list()
+}
+```
+
+Creating the new list-column:
+
+```{r}
+nums %>%
+  rowwise() %>%
+  mutate(test = right_mult(c_across(x1:x3), A)) %>%
+  ungroup()
+```
+
+Unnesting the list contents into their own columns:
+
+```{r}
+nums %>%
+  rowwise() %>%
+  mutate(test = right_mult(c_across(x1:x3), A)) %>%
+  ungroup() %>%
+  unnest_wider(test)
+```
+
+Checking our work:
+
+```{r}
+right_mult(c(3, 1, 4), A)
+right_mult(c(5, 2, 4), A)
 ```

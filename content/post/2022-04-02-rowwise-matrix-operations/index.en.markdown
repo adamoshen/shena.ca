@@ -19,8 +19,7 @@ featured: no
 
 
 ```r
-library(tibble)
-library(dplyr)
+library(tidyverse)
 
 set.seed(20)
 ```
@@ -146,6 +145,8 @@ to `ungroup` when you're done mutating.
 
 ## Rowwise matrix operations
 
+### Output is a vector of length 1
+
 Suppose you wanted to perform the following computation using the values found in each row:
 
 $$ \mathbf{x}'\mathbf{A}\mathbf{x} $$
@@ -168,7 +169,7 @@ quadratic <- function(x, A) {
 }
 ```
 
-For the $ A $ matrix, let's use:
+For the $ \mathbf{A} $ matrix, let's use:
 
 
 ```r
@@ -226,4 +227,96 @@ quadratic(c(5, 2, 4), A)
 
 ```
 ## [1] 353
+```
+
+### Output is a vector of length greater than 1
+
+Suppose you wanted to perform the following computation using the values found in each row:
+
+$$ \mathbf{A}\mathbf{x} $$
+
+and wanted each value to go into its own column. This can be accomplished by first creating a
+function similar to the previous, but returning a list containing a named vector instead. Then we
+can use [`unnest_wider`](https://tidyr.tidyverse.org/reference/hoist.html) to unnest the values
+within the list into their own columns.
+
+Creating the right-multiplying function:
+
+
+```r
+right_mult <- function(x, A) {
+  x <- as.matrix(x)
+  
+  drop(A %*% x) %>%
+    set_names(., paste0("new_x", 1:length(.))) %>%
+    list()
+}
+```
+
+Creating the new list-column:
+
+
+```r
+nums %>%
+  rowwise() %>%
+  mutate(test = right_mult(c_across(x1:x3), A)) %>%
+  ungroup()
+```
+
+```
+## # A tibble: 6 x 5
+##      x1    x2    x3    x4 test     
+##   <int> <int> <int> <int> <list>   
+## 1     3     1     4     5 <dbl [3]>
+## 2     2     3     1     1 <dbl [3]>
+## 3     1     5     5     5 <dbl [3]>
+## 4     2     1     1     2 <dbl [3]>
+## 5     5     5     1     1 <dbl [3]>
+## 6     5     2     4     5 <dbl [3]>
+```
+
+Unnesting the list contents into their own columns:
+
+
+```r
+nums %>%
+  rowwise() %>%
+  mutate(test = right_mult(c_across(x1:x3), A)) %>%
+  ungroup() %>%
+  unnest_wider(test)
+```
+
+```
+## # A tibble: 6 x 7
+##      x1    x2    x3    x4 new_x1 new_x2 new_x3
+##   <int> <int> <int> <int>  <dbl>  <dbl>  <dbl>
+## 1     3     1     4     5     21     26     31
+## 2     2     3     1     1     12      9     21
+## 3     1     5     5     5     31     27     39
+## 4     2     1     1     2      8      9     15
+## 5     5     5     1     1     19     15     39
+## 6     5     2     4     5     25     30     42
+```
+
+Checking our work:
+
+
+```r
+right_mult(c(3, 1, 4), A)
+```
+
+```
+## [[1]]
+## new_x1 new_x2 new_x3 
+##     21     26     31
+```
+
+```r
+right_mult(c(5, 2, 4), A)
+```
+
+```
+## [[1]]
+## new_x1 new_x2 new_x3 
+##     25     30     42
 ```
