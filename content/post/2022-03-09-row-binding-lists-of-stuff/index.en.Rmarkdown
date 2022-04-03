@@ -5,6 +5,7 @@ date: '2022-03-09'
 slug: 2022-03-09-row-binding-lists-of-stuff
 categories:
   - r
+  - data-wrangling
 tags:
   - r
 subtitle: ''
