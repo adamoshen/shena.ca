@@ -3,8 +3,8 @@ bio: "Bone app the teeth"
 
 education:
   courses:
-  - course: PhD in Statistics
-    institution: "[Carleton University](https://carleton.ca/math/)"
+  - course: PhD in Data Science
+    institution: "[Carleton University](https://carleton.ca/dsa/)"
     year: "*"
   - course: MSc in Statistics
     institution: "[Carleton University](https://carleton.ca/math/)"
@@ -54,8 +54,8 @@ superuser: true
 title: Adam Shen
 ---
 
-I am a PhD student studying statistics at [Carleton University](https://carleton.ca/math/), supervised by
-[Dr. Dave Campbell](https://people.math.carleton.ca/~davecampbell/Dave_Campbell.html).
+I am a PhD student studying data science at [Carleton University](https://carleton.ca/dsa/),
+supervised by [Dr. Dave Campbell](https://people.math.carleton.ca/~davecampbell/Dave_Campbell.html).
 
 My master's thesis,
 [*Tales of a Coronavirus Pandemic: Topic Modelling with Short-Text Data*](https://doi.org/10.22215/etd/2021-14497),
