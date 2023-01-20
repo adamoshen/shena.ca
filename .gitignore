@@ -38,9 +38,7 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
-# Blogdown stuff
+# Miscellaneous
 public/
 resources/
-themes/starter-academic/
-R/
 notes.txt
