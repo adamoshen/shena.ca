@@ -6,9 +6,9 @@ name = "DarkForest"
   primary = "#4caf50"
 
   # Menu
-  menu_primary = "#4caf50"
+  menu_primary = "#504caf"
   menu_text = "#fff"
-  menu_text_active = "#1b5e20"
+  menu_text_active = "#abaf4c"
   menu_title = "#fff"
 
   # Home sections
