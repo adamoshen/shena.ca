@@ -7,8 +7,8 @@
 
 appearance:
   theme_day: forest
-  theme_night: darkforest
-  font: fira
+  theme_night: adam_dark
+  font: adam
   font_size: M
 
 # SEO
