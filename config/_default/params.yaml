@@ -61,7 +61,7 @@ locale:
 
 features:
   syntax_highlighter:
-    theme_light: catppuccin-latte
+    theme_light: rainbow_dash_mod
     theme_dark: onedark
   math:
     enable: true
