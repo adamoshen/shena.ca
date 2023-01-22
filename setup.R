@@ -1,4 +1,7 @@
-blogdown::new_site(theme = "wowchemy/starter-hugo-academic")
+blogdown::new_site(
+  force = TRUE,
+  theme = "wowchemy/starter-hugo-academic"
+)
 
 # For future reference
 # https://github.com/wowchemy/starter-hugo-academic/tree/69d48921b74f014c71c56b0f76d4f9fc37762ec9
