@@ -1,2 +1,3 @@
 *.Rmd linguist-detectable
 *.Rmarkdown linguist-language=RMarkdown linguist-detectable
+themes/* linguist-vendored
