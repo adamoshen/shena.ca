@@ -1,0 +1,221 @@
+---
+title: Row-binding lists of stuff
+author: Adam Shen
+date: '2022-03-09'
+slug: row-binding-lists-of-stuff
+categories:
+  - r
+  - data-wrangling
+tags:
+  - r
+subtitle: ''
+summary: 'Converting lists of vectors and matrices into a single data frame'
+featured: no
+reading_time: false
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  echo=TRUE, message=FALSE, warning=FALSE,
+  fig.align="center", dev="svglite"
+)
+```
+
+The problem of needing to convert a single-level list of data into a single tibble comes up once
+in while and I can never remember how I did it the last time I did it. So here we are! I would also
+like to stay in the tidyverse where possible in order to keep the flow of my pipelines. I'd say the
+only exception is the usage of `paste0` over `str_c`/`glue`.
+
+# Packages and setup
+
+```{r}
+library(tibble)
+library(dplyr)
+library(purrr)
+library(ggplot2) # optional
+library(tidytext) # optional
+
+theme_set(theme_bw()) # optional
+
+set.seed(20)
+```
+
+# Lists of vectors
+
+Recently, I needed to find the roots of arbitrary quadratic equations using the
+[`polyroot`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/polyroot.html) function. The
+equation was of the form:
+
+{{< math >}}
+$$
+a_{22}x_{2}^2 \,+\, (2a_{12}x_{1} + b_{2})x_{2} \,+\, (c + b_{1}x_{1} + a_{11}x_{1}^2) \,=\, 0.
+$$
+{{< /math >}}
+
+If the equation had two distinct roots, a vector of length two was returned, e.g.:
+
+```{r}
+polyroot(c(6, 5, 1))
+```
+
+If the equation had one distinct root or was not actually quadratic
+({{< math >}}$a = 0${{< /math >}}), a vector of length one was returned, e.g.:
+
+```{r}
+polyroot(c(1, 2))
+```
+
+If the equation was inconsistent ({{< math >}}$a,\, b = 0,\, c \neq 0${{< /math >}}), a vector of
+length zero was returned, e.g.:
+
+```{r}
+polyroot(3)
+```
+
+In addition to finding the root, I also wanted to know the value of
+{{< math >}}$x_1${{< /math >}} where this root occurred.
+
+Let's first create a function that will calculate the required quadratic coefficients, given the
+input value `x1`.
+
+```{r}
+get_coefs <- function(x1) {
+  coef_a <- 0.002
+  coef_b <- 2*(-0.013)*x1 - 0.23
+  coef_c <- 1.08 + 1.23*x1 + 0.098*x1^2
+  
+  c(coef_c, coef_b, coef_a)
+}
+```
+
+Now, let's find some roots for some basic values of `x1`.
+
+```{r}
+some_roots <- seq(1, 1.60, length.out=7) %>%
+  map(get_coefs) %>%
+  map(polyroot)
+
+head(some_roots)
+```
+
+To convert this data into a tibble with all the roots in one column, we should map `as_tibble_col`
+over all list elements.
+
+```{r}
+some_roots %>%
+  head() %>%
+  map_dfr(as_tibble_col, column_name="root")
+```
+
+While this works well in row-binding the roots into a single column tibble, it's unclear which roots
+belong to which values of `x1`. In addition, it's not a simple as just column-binding back the
+initial values of `x1` that we passed in since some roots are of length one and some are of length
+two.
+
+The solution is to give the intial sequence of `x1` values names that match its values and make use
+of `map_dfr`'s `.id` argument, e.g.
+
+```{r}
+seq(-13, 33, by=0.10) %>%
+  set_names(., .) %>%
+  head()
+```
+
+Putting it all together:
+
+```{r}
+some_roots <- seq(-13, 33, by=0.10) %>%
+  set_names(., .) %>%
+  map(get_coefs) %>%
+  map(polyroot) %>%
+  map_dfr(as_tibble_col, column_name="root", .id="x1")
+
+some_roots
+```
+
+Note that at this point, `x1` is a column of type character, not numeric. Coercion of `x1` to
+numeric will be required for plotting.
+
+## Optional plots of real roots
+
+```{r}
+real_roots <- some_roots %>%
+  mutate(root = zapsmall(root)) %>%
+  filter(Im(root) == 0) %>%
+  mutate(
+    root = Re(root),
+    x1 = as.numeric(x1)
+  )
+
+real_roots
+```
+
+```{r}
+ggplot(real_roots, aes(x=x1, y=root)) +
+  geom_point()
+```
+
+# Lists of matrices with rownames
+
+Let's first generate some data.
+
+```{r}
+phi <- function(n) {
+  out <- matrix(
+    runif(n),
+    dimnames = list(
+      stringi::stri_rand_strings(
+        n = n,
+        length = sample(3:8, size=n, replace=TRUE),
+        pattern = "[a-z]"
+      ),
+      "probability"
+    )
+  )
+  
+  out / colSums(out)
+}
+```
+
+```{r}
+topic_term_prob <- rep(5, 3) %>%
+  set_names(., paste0("topic", 1:length(.))) %>%
+  map(phi)
+
+topic_term_prob
+```
+
+I'd like to convert this into a single tibble via row-binding, while moving the rownames into its
+own column, and also creating another column to keep track of the topic from which these topic-term
+distributions originated.
+
+The `as_tibble` method for matrices indeed supports the `rownames` argument, allowing input of a
+single string for the name of new column of rownames. This is not really documented on the
+[`as_tibble` reference](https://tibble.tidyverse.org/reference/as_tibble.html) under
+`# S3 method for matrix`, but is documented under
+[`as_tibble.matrix should keep rownames attribute #288`](https://github.com/tidyverse/tibble/issues/288#issuecomment-334244077).
+
+For the topic numbers, we can once again make use of the `.id` argument of `map_dfr`.
+
+```{r}
+topic_term_prob_tibble <- topic_term_prob %>%
+  map_dfr(as_tibble, rownames="term", .id="topic")
+
+topic_term_prob_tibble
+```
+
+```{r, echo=FALSE}
+knitr::include_graphics("./img/satisfying.png", dpi=NA)
+```
+
+## Optional plots of topic term distributions
+
+```{r}
+topic_term_prob_tibble <- topic_term_prob_tibble %>%
+  mutate(term = reorder_within(term, by=probability, within=topic))
+
+ggplot(topic_term_prob_tibble, aes(x=probability, y=term, fill=topic)) +
+  geom_col(show.legend=FALSE) +
+  scale_y_reordered() +
+  facet_wrap(~topic, scales="free_y")
+```
