@@ -4,10 +4,6 @@ subtitle: "Probability Models"
 type: page
 ---
 
-Office Hours: by appointment, please email me to book an appointment
-
-MTC Hours: Wednesdays 2pm to 4pm, starting September 28
-
 |             |                                          |                                            |
 |-------------|------------------------------------------|--------------------------------------------|
 | Tutorial 1  | [Questions](./Tutorial-1-Questions.pdf)  | [Solutions](./Tutorial-1-Solutions.pdf)    |
