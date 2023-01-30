@@ -63,6 +63,9 @@ social:
   - icon: github
     icon_pack: fab
     link: https://github.com/adamoshen
+  - icon: mastodon
+    icon_pack: fab
+    link: https://tech.lgbt/@adamoshen
   # - icon: linkedin
   #   icon_pack: fab
   #   link: https://www.linkedin.com/
