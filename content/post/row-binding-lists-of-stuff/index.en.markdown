@@ -16,10 +16,10 @@ reading_time: false
 
 
 
-The problem of needing to convert a single-level list of data into a single tibble comes up once
-in while and I can never remember how I did it the last time I did it. So here we are! I would also
-like to stay in the tidyverse where possible in order to keep the flow of my pipelines. I'd say the
-only exception is the usage of `paste0` over `str_c`/`glue`.
+The problem of needing to convert a single-level list of data into a single tibble comes up every
+once in a while and I can never remember how I did it the last time I did it. So here we are! I
+would also like to stay in the tidyverse where possible in order to keep the flow of my pipelines.
+I'd say the only exception is the usage of `paste0` over `str_c`/`glue`.
 
 # Packages and setup
 
