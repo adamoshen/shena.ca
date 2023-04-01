@@ -34,7 +34,7 @@ interests:
 education:
   courses:
     - course: PhD in Data Science
-      institution: "[Carleton University](https://carleton.ca/dsa/)"
+      institution: "[Carleton University](https://carleton.ca/dsaai/)"
       year: "*"
     - course: MSc in Statistics
       institution: "[Carleton University](https://carleton.ca/math/)"
