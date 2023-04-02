@@ -83,7 +83,7 @@ email: ''
 highlight_name: true
 ---
 
-I am a PhD student studying data science at [Carleton University](https://carleton.ca/dsa/),
+I am a PhD student studying data science at [Carleton University](https://carleton.ca/dsaai/),
 supervised by [Dr. Dave Campbell](https://people.math.carleton.ca/~davecampbell/Dave_Campbell.html).
 
 My master's thesis,
