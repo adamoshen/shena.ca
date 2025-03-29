@@ -17,6 +17,8 @@ enableEmoji = true
 
 [markup]
   defaultMarkdownHandler = "goldmark"
+  [markup.goldmark.extensions]
+    typographer = false
   [markup.goldmark.renderer]
     unsafe = true  # Enable user to embed HTML snippets in Markdown content.
     hardwraps = false
@@ -34,15 +36,15 @@ enableEmoji = true
   description = "The personal website of Adam Shen"
   favicon = "/img/icon.png"
   logo = ""
-  mainSections = ["blog", "project", "talk"]
+  mainSections = ["about", "posts", "teaching"]
   navallcaps = false
   # show/hide social icons in site header & footer
   # configure social icons and links below in [[params.social]]
   socialInHeader = false
-  socialInFooter = true
+  socialInFooter = false
   # Default image for social sharing and search engines.
   # Place image file in `static` folder and specify image name here.
-  sharing_image = ""
+  sharing_image = "img/future_me.jpg"
   # Twitter username (without @). Used when a visitor shares your site on Twitter.
   twitter = ""
 
@@ -62,7 +64,7 @@ enableEmoji = true
   # serif options: Fraunces / EB Garamond / Bitter
   # sans-serif options: Commissioner / Atkinson Hyperlegible / Metropolis
   # if you import your own fonts, name them here too
-  customtextFontFamily = "Commissioner"
+  customtextFontFamily = "Atkinson Hyperlegible"
   customheadingFontFamily = "Fraunces"
   # alternatively, leave empty and select basic font options: sans-serif or serif
   # for more http://tachyons.io/docs/typography/font-family/
@@ -141,51 +143,51 @@ enableEmoji = true
   # Configure header
   [[menu.header]]
     name = "About"
-    title = "About Blogophonic"
+    title = "About"
     url = "/about/"
     weight = 1
   [[menu.header]]
-    name = "Blog"
-    title = "Blog"
-    url = "/blog/"
+    name = "Posts"
+    title = "Posts"
+    url = "/posts/"
     weight = 2
   [[menu.header]]
-    name = "Projects"
-    title = "Project Portfolio"
-    url = "/project/"
+    name = "Teaching"
+    title = "Teaching"
+    url = "/teaching/"
     weight = 3
-  [[menu.header]]
-    name = "Talks"
-    title = "Talks"
-    url = "/talk/"
-    weight = 4
-  [[menu.header]]
-    name = "A collection"
-    title = "A collection"
-    url = "/collection/"
-    weight = 5
-  [[menu.header]]
-    name = "Elements"
-    title = "Element Page"
-    url = "/elements/"
-    weight = 6
+  #[[menu.header]]
+  #  name = "Talks"
+  #  title = "Talks"
+  #  url = "/talk/"
+  #  weight = 4
+  #[[menu.header]]
+  #  name = "A collection"
+  #  title = "A collection"
+  #  url = "/collection/"
+  #  weight = 5
+  #[[menu.header]]
+  #  name = "Elements"
+  #  title = "Element Page"
+  #  url = "/elements/"
+  #  weight = 6
 
   # Configure footer
-  [[menu.footer]]
-    name = "License"
-    title = "License"
-    url = "/license/"
-    weight = 1
-  [[menu.footer]]
-    name = "Contact"
-    title = "Contact form"
-    url = "/contact/"
-    weight = 2
-  [[menu.footer]]
-    name = "Contributors"
-    title = "Contributors"
-    url = "/contributors/"
-    weight = 3
+  #[[menu.footer]]
+  #  name = "License"
+  #  title = "License"
+  #  url = "/license/"
+  #  weight = 1
+  #[[menu.footer]]
+  #  name = "Contact"
+  #  title = "Contact form"
+  #  url = "/contact/"
+  #  weight = 2
+  #[[menu.footer]]
+  #  name = "Contributors"
+  #  title = "Contributors"
+  #  url = "/contributors/"
+  #  weight = 3
 
 # see https://gohugo.io/about/hugo-and-gdpr/
 [privacy]
