@@ -7,12 +7,14 @@
     {{ if .Params.show_author_byline }}<p class="f7 measure lh-copy tc center i">{{ if .Params.author }}Written by {{ .Params.author }}{{ end }}</p>{{ end }}
   </section>
   <section class="blog-content db flex-ns flex-row-ns flex-wrap-ns items-start mw8 center">
+    <!--
     {{ $paginator := .Paginate (where .RegularPagesRecursive "Type" "blog").ByDate.Reverse }}
       {{ range $paginator.Pages }}
         {{ .Scratch.Set "$root" $caller }}
         {{ partial "shared/summary-grid" . }}
       {{ end }}
     {{ partial "shared/list-pagination.html" . }}
+    -->
   </section>
 </main>
 {{ end }}
