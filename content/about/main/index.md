@@ -1,17 +1,31 @@
 ---
 ## Configure page content in wide column
-title: "Why apéro?" # leave blank to exclude
-number_featured: 1 # pulling from mainSections in config.toml
+title: "Thanks for stopping by!" # leave blank to exclude
+number_featured: 0 # pulling from mainSections in config.toml
 use_featured: false # if false, use most recent by date
-number_categories: 3 # set to zero to exclude
+number_categories: 0 # set to zero to exclude
 show_intro: true
 intro: |
-  Apéro is a unique kind of casual get-together in French culture, when you gather with friends and get to know each other better over some apéritifs, snacks, and anything in between. A good apéro is one where you'd happily spend a few hours just hanging out.
+  I am a PhD student studying data science at [Carleton University](https://carleton.ca/dsaai/),
+  supervised by
+  [Dr. Dave Campbell](https://people.math.carleton.ca/~davecampbell/Dave_Campbell.html).
   
-  I hope this theme helps you create your own virtual apéro. A place where you and your site's visitors enjoy spending time, and one that helps folks get to know you better. 
+  I completed my Master's in Statistics in 2021 at [Carleton University](https://carleton.ca/math/)
+  and my Bachelor's in Statistics in 2019 at [McMaster University](https://www.math.mcmaster.ca/).
+  
+  My master's thesis,
+  [Tales of a Coronavirus Pandemic: Topic Modelling with Short-Text Data](https://doi.org/10.22215/etd/2021-14497),
+  explored graphical, quantitative, and statistical methods for analysing unstructured short-text
+  data related to the COVID-19 pandemic. I presented my findings at the Ninth Annual Canadian
+  Statistics Students Conference and was awarded 2nd Prize for the Graduate Oral Presentation Award
+  (Master's).
+  
+  I am also a [data scientist](https://profils-profiles.science.gc.ca/en/profile/adam-shen) at
+  Canada Revenue Agency where I apply natural language processing tools in the setting of audit
+  communications to identify qualitative indicators of non-compliance risk.
 show_outro: true
 outro: |
-  <i class="fas fa-glass-cheers pr2"></i>Sincere thanks to [Maëlle Salmon](https://masalmon.eu/) for her help naming this Hugo theme!
+  Contact me at: adam.shen [at] carleton [dot] ca
 ---
 
 ** index doesn't contain a body, just front matter above.
