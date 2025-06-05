@@ -42,3 +42,6 @@ vignettes/*.pdf
 public/
 resources/
 notes.txt
+
+# Do not copy pdf files
+content/teaching/**/*.pdf
