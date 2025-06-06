@@ -2,8 +2,9 @@
 action_label: Read More &rarr;
 action_link: /about
 action_type: text
-description: I am a PhD student and data scientist working at the intersection of statistics and
-  natural language processing.
+description: I am a data scientist working at the intersection of statistics and natural language
+  processing. I love the [R programming language](https://www.r-project.org/) and am a proponent of
+  all things [`tidyverse`](https://www.tidyverse.org/).
 image_left: true
 images:
 - img/future_me.jpg
