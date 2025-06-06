@@ -8,6 +8,8 @@ paginator: false
 
 ### Carleton University
 
+[Stat 2559, Winter 2023](./2559w23/)
+
 [Stat 4604, Fall 2022](https://adamoshen.github.io/4604f22/)
 
 [Stat 2605, Fall 2022](./2605f22/)
