@@ -2,3 +2,5 @@
 *.Rmarkdown linguist-language=RMarkdown linguist-detectable
 assets/** linguist-vendored
 themes/** linguist-vendored
+layouts/** linguist-vendored
+unused_content/** linguist-vendored
