@@ -106,17 +106,21 @@ enableEmoji = true
   # Icon pack "fas" includes solid icons, see: https://fontawesome.com/icons?d=gallery&s=solid&m=free
   # Icon pack "far" includes regular icons, see: https://fontawesome.com/icons?d=gallery&s=regular&m=free
   [[params.social]]
-      icon      = "github" # icon name without the 'fa-'
-      icon_pack = "fab"
-      url       = "https://github.com/adamoshen"
-  [[params.social]]
-      icon      = "spotify" # icon name without the 'fa-'
+      icon      = "spotify"
       icon_pack = "fab"
       url       = "https://shena.ca/spotify"
   [[params.social]]
-      icon      = "bluesky" # icon name without the 'fa-'
+      icon      = "bluesky"
       icon_pack = "fab"
       url       = "https://bsky.app/profile/adamoshen.bsky.social"
+  [[params.social]]
+      icon      = "github"
+      icon_pack = "fab"
+      url       = "https://github.com/adamoshen"
+  [[params.social]]
+      icon      = "linkedin"
+      icon_pack = "fab"
+      url       = "https://linkedin.com/in/adamoshen"
 #  [[params.social]]
 #      icon      = "x-twitter" # icon name without the 'fa-'
 #      icon_pack = "fab"
