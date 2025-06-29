@@ -1,0 +1,306 @@
+---
+title: What they forgot to teach you in your introduction to linear regression with R
+author: Adam Shen
+date: '2025-06-29'
+slug: wtf-intro-linear-regression
+categories:
+  - r
+  - education
+tags:
+  - r
+  - linear-regression
+subtitle: ''
+summary: "R functions that would have enhanced your coding experience when modelling"
+featured: no
+reading_time: false
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  echo=TRUE, message=FALSE, warning=FALSE,
+  fig.align="center", dev="svglite"
+)
+
+new_hooks <- fansi::set_knit_hooks(
+  knitr::knit_hooks,
+  which = c("output", "message", "warning", "error")
+)
+
+options(crayon.enabled = TRUE)
+```
+
+There exists a handful of functions in base-R that are closely related to the typical introductory
+linear regression curriculum. More often than not, I feel that these functions are not exposed to
+students in any introductory linear regression course where R is used for the computational
+component. For students who are taking or have recently finished an introductory linear regression
+course, if there were any instances where you came across some code that made you think, "there must
+be an easier, cleaner way to do this", you were probably right!
+
+There are a number of reasons why I have wanted to make this post for a while:
+
+- The functions that I will discuss in this post can be extended to other contexts, such as GLMs,
+with one particular function being applicable to more general contexts.
+
+- It encourages you early on to write clean code and manage your workspace effectively. In cases
+where you come across code that feels busy, inefficient, or clutters up your workspace with
+unnecessary transitory variables, take the initiative to seek out cleaner alternatives.
+
+- Follow the philosophy of "work smarter, not harder".
+
+- I have met **a lot** of students who are just starting to use R and already dread using/learning
+it. What they don't know is that this is often a result of the inefficient misuse by instructors who
+barely know the language themselves (it happened more often that I would have hoped). Therefore, I
+hope this post gives you an ounce of hope that R is not as messy/ugly as you might have been shown,
+and that you do not become a hateR.
+
+## Setup
+
+We will be using the [`{dplyr}`](https://dplyr.tidyverse.org/) package for a tiny amount of data
+wrangling. It can be done in base-R, if that is your preference.
+
+```{r}
+library(dplyr)
+```
+
+If you do not have `{dplyr}` installed, you can install it by calling `install.packages("dplyr")`
+in the console.
+
+For the following demonstrations, we will be using the `mtcars` data set. This data set is included
+in base-R.
+
+```{r}
+data(mtcars)
+
+head(mtcars)
+```
+
+For our base linear model, we will use `mpg` as the response and `disp` as a predictor.
+
+```{r}
+base_model <- lm(mpg ~ disp, data=mtcars)
+
+summary(base_model)
+```
+
+## `update()`
+
+The `update()` function allows you to add or modify arguments used to construct a linear model and
+subsequently re-fit the model using these new values. This can include modifying the response
+variable, the covariates, the data set used, or even other options used to fit the model. There are
+two benefits to using `update()` rather than building a new model from scratch.
+
+1. You specify only the arguments whose values should change. As such, all other aspects of the
+existing model that should remain unchanged do not need to be re-typed.
+
+2. Since the `update()` function requires the user to specify an object to update, from a workflow
+perspective, the code reveals the evolutionary relationship between models in your workspace by
+highlighting what is changing between model builds, and provides a "story" for the model building
+process.
+
+Suppose we wanted to rebuild my `base_model` using a subset of the `mtcars` data set that includes
+only four and eight cylinder cars.
+
+```{r}
+mtcars_4or8cyl <- mtcars %>%
+  filter(cyl %in% c(4, 8))
+
+# Or in base-R
+# mtcars_4or8cyl <- mtcars[mtcars$cyl %in% c(4, 8),]
+```
+
+Instead of building a linear model from scratch again by calling:
+
+```{r, eval=FALSE}
+second_model <- lm(mpg ~ disp, data=mtcars_4or8cyl)
+```
+
+We can call:
+
+```{r}
+second_model <- update(base_model, data=mtcars_4or8cyl)
+```
+
+If we wanted to update the formula instead of the data set, we can take advantage of the
+`.`-shorthand, which means to keep everything from the respective side of the formula.
+
+```{r}
+third_model <- update(base_model, . ~ . + hp)
+```
+
+Since the formula supplied to `base_model` was `mpg ~ disp`, `. ~ . + hp` will translate to
+`mpg ~ disp + hp`.
+
+## `add1()` / `drop1()`
+
+The `add1()` and `drop1()` functions are useful functions for performing the required hypothesis
+tests to add or drop a covariate from a set of candidate covariates. Too often have I seen the
+following workflow being recommended to students to perform a single variable addition: 
+
+```{r, eval=FALSE}
+model4a <- lm(mpg ~ disp + hp, data=mtcars)
+model4b <- lm(mpg ~ disp + drat, data=mtcars)
+model4c <- lm(mpg ~ disp + wt, data=mtcars)
+model4d <- lm(mpg ~ disp + qsec, data=mtcars)
+
+anova(model4a, base_model)
+anova(model4b, base_model)
+anova(model4c, base_model) # Has the smallest p-value
+anova(model4d, base_model)
+
+model4 <- model4c
+```
+
+You **do not** need to do all this work! In addition to being a lot of typing (or copying, pasting,
+and replacing, which is error-prone), you also end up cluttering your workspace with four additional
+models, three of which you will never use again. After deciding on a fourth model, if you had
+decided you wanted to proceed with adding a third covariate, you'd continue cluttering up your
+workspace with even more models!
+
+The following is all you need:
+
+```{r}
+add1(base_model, ~ . + hp + drat + wt + qsec, test="F")
+```
+
+This single line of code builds the required models and returns the p-value of the corresponding
+F-test. From the output, we can see that `wt` has the smallest p-value and should be added to the
+model. We can then use the `update()` function to create our second model.
+
+```{r}
+fourth_model <- update(base_model, . ~ . + wt)
+```
+
+For single variable deletions, a similar procedure can be followed using `drop1()`. For this, I
+build what I consider to be a "full model", which has all the covariates of interest: `disp`, `hp`,
+`drat`, `wt`, and `qsec`. 
+
+```{r}
+full_model <- lm(mpg ~ disp + hp + drat + wt + qsec, data=mtcars)
+```
+
+If all covariates are eligible to be dropped, we can call:
+
+```{r}
+drop1(full_model, ~ ., test="F")
+```
+
+If we only want to consider dropping one of either, for example, `wt` or `qsec`, we can call:
+
+```{r}
+drop1(full_model, ~ wt + qsec, test="F")
+```
+
+As before, we can finalise the model by making a call to `update()`:
+
+```{r, eval=FALSE}
+fifth_model <- update(full_model, . ~ . - qsec)
+```
+
+## Optional tidy extensions
+
+The [`{broom}`](https://broom.tidymodels.org/) package from
+[`{tidymodels}`](https://www.tidymodels.org/packages/) contains tools for tidying model output into
+tibbles (enhanced data frames) for when you require further (possibly programmatic) wrangling of
+model output.
+
+```{r}
+library(broom)
+```
+
+When calling `summary()` on a linear model, a lot of information is returned:
+
+```{r}
+summary(full_model)
+```
+
+This information can be returned as two separate tibbles via `tidy()` and `glance()`. 
+
+## `tidy()`
+
+We can call `tidy()` to obtain the coefficient table, standard errors, values of the test
+statistics, and p-values.
+
+```{r}
+tidy(full_model)
+```
+
+Optionally, with `tidy()`, we can also obtain the confidence intervals:
+
+```{r}
+tidy(full_model, conf.int=TRUE)
+```
+
+This is useful since base-R's `confint()` function actually returns a matrix:
+
+```{r}
+confint(full_model)
+
+class(confint(full_model))
+```
+
+Compared to base-R's `confint(x)`, `tidy(x, conf.int = TRUE)` saves us a few steps of needing to
+convert the matrix of confidence intervals to data frames (or tibbles) and then binding the results
+back to the coefficient table so that they can be viewed together.
+
+## `glance()`
+
+To obtain other miscellaneous attributes of the fitted linear model that we usually see in the
+output of `summary()`, we can pass it to `glance()`:
+
+```{r}
+glance(full_model)
+```
+
+## `augment()`
+
+The `augment()` function is a quick way to get the fitted values column-binded to the data frame
+used to fit the model, i.e. you get all covariate values plus the fitted value, plus additional
+diagnostic values.
+
+```{r}
+augment(full_model)
+```
+
+You can also obtain confidence or prediction intervals for each observation:
+
+```{r}
+augment(full_model, interval="confidence")
+```
+
+Finally, you can also use augment to obtain the column-binded fitted values of unseen data by
+passing it to `newdata`:
+
+```{r}
+fake_cars <- tibble(
+  mpg = c(26, 25),
+  disp = c(170, 265),
+  hp = c(100, 105),
+  drat = c(2.7, 3.11),
+  wt = c(3.10, 2.98),
+  qsec = c(19.1, 20.3)
+)
+
+augment(full_model, newdata=fake_cars)
+```
+
+If we know the true values of the response variable (in this case, `mpg`), we can subsequently
+compare the `mpg` values with the `.fitted` values to evaluate predictive performance via the
+[`yardstick`](https://yardstick.tidymodels.org/) package. For example,
+we might do something like:
+
+```{r, eval=FALSE}
+more_unseen_data <- tibble(
+  . . .
+)
+
+augment(full_model, newdata=more_unseen_data) %>%
+  yardstick::rmse(truth=mpg, estimate=.fitted)
+```
+
+## Supplementary notes
+
+- `update()`, `add1()`, and `drop1()` also work with glms!
+
+- `update()` is a generic method. It works with lms, glms, and any other objects that have a `call`
+element. The `update()` method can often be found in other modelling packages for use with those
+package-specific models to perform updates in a similar fashion.
