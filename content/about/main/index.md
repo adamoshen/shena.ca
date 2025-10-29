@@ -6,9 +6,10 @@ use_featured: false # if false, use most recent by date
 number_categories: 0 # set to zero to exclude
 show_intro: true
 intro: |
-  I work as a [data scientist](https://profils-profiles.science.gc.ca/en/profile/adam-shen) at
-  Canada Revenue Agency where I apply natural language processing tools in the setting of written
-  audit communications to identify qualitative indicators of non-compliance risk.
+  I work as a data scientist at Public Services and Procurement Canada where I develop and refine
+  analytical tools for data related to human resources and pay. Previously, I was a data
+  scientist at Canada Revenue Agency where I applied natural language processing tools in the
+  setting of written audit communications to identify qualitative indicators of non-compliance risk.
 
   I completed my Master's in Statistics in 2021 at [Carleton University](https://carleton.ca/math/)
   and my Bachelor's in Statistics in 2019 at [McMaster University](https://www.math.mcmaster.ca/).

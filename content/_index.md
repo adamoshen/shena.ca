@@ -2,9 +2,9 @@
 action_label: Read More &rarr;
 action_link: /about
 action_type: text
-description: I am a data scientist working at the intersection of statistics and natural language
-  processing. I love working with the [R programming language](https://www.r-project.org/) and am a
-  proponent of all things [`tidyverse`](https://www.tidyverse.org/).
+description: I am a data scientist who loves the
+  [R programming language](https://www.r-project.org/), all things that are
+  [tidy](https://www.tidyverse.org/), and coding as if it were an art form.
 image_left: true
 images:
 - img/future_me.jpg
