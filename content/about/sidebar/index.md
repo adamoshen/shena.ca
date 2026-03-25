@@ -9,6 +9,8 @@ link_list_label: "Fun Links" # bookmarks, elsewhere, etc.
 link_list:
 - name: Sad girl playlist (Spotify)
   url: https://shena.ca/sadgirl
+- name: League of Legends (blitz.gg)
+  url: https://blitz.gg/lol/profile/NA1/ultrablue-zero
   # - name: Paris
   #   url: https://en.wikipedia.org/wiki/Paris
   # - name: Pastries
