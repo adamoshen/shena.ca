@@ -6,7 +6,7 @@ use_featured: false # if false, use most recent by date
 number_categories: 0 # set to zero to exclude
 show_intro: true
 intro: |
-  I am a [senior data scientist](https://new.geds-sage.gc.ca/en/GEDS/?pgid=015&dn=Q049QURBTS5TSEVOQFRQU0dDLVBXR1NDLkdDLkNBLE9VPVBPLVNQLE9VPUhDTVNJQi1ER0dDSFNJLE9VPVBTUEMtU1BBQyxPPUdDLEM9Q0E=)
+  I am a [senior data scientist](https://www.shena.ca/geds)
   at [Public Services and Procurement Canada](https://www.canada.ca/en/public-services-procurement.html)
   where I develop and refine analytical tools for data related to human resources and pay.
   
